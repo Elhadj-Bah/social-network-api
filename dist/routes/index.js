@@ -1,5 +1,10 @@
-import { Router } from "express";
-import apiRoutes from "./api/index.js";
-const router = Router();
-router.use("/api", apiRoutes); // WE ARE REDIRECTING the incoming REQUEST OBJECT
-export default router;
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const index_js_1 = __importDefault(require("./api/index.js"));
+const router = (0, express_1.Router)();
+router.use("/api", index_js_1.default); // WE ARE REDIRECTING the incoming REQUEST OBJECT
+exports.default = router;

@@ -16,4 +16,4 @@ router.route("/:userId").get(getUserById).put(updateUser).delete(deleteUser);
 router.route("/:id/friends/:friendId").post(addFriend);
 router.route("/:id/friends/:friendId").delete(removeFriend);
 
-export default router;
+export { router as userRoutes };

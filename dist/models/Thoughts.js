@@ -1,8 +1,10 @@
-import { Schema, Types, model } from "mongoose";
-const ReactionSchema = new Schema({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = require("mongoose");
+const ReactionSchema = new mongoose_1.Schema({
     reactionId: {
-        type: Schema.Types.ObjectId,
-        default: new Types.ObjectId(),
+        type: mongoose_1.Schema.Types.ObjectId,
+        default: new mongoose_1.Types.ObjectId(),
     },
     reactionBody: {
         type: String,
@@ -20,7 +22,7 @@ const ReactionSchema = new Schema({
         getters: true,
     },
 });
-const ThoughtSchema = new Schema({
+const ThoughtSchema = new mongoose_1.Schema({
     thoughtText: {
         type: String,
         required: true,
@@ -46,5 +48,5 @@ const ThoughtSchema = new Schema({
 ThoughtSchema.virtual("reactionCount").get(function () {
     return this.reactions.length;
 });
-const Thoughts = model("Thoughts", ThoughtSchema);
-export default Thoughts;
+const Thoughts = (0, mongoose_1.model)("Thoughts", ThoughtSchema);
+exports.default = Thoughts;

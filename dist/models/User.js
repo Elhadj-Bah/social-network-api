@@ -1,6 +1,8 @@
-import { Schema, model } from "mongoose";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = require("mongoose");
 // Schema to create User model
-const UserSchema = new Schema({
+const UserSchema = new mongoose_1.Schema({
     username: {
         type: String,
         unique: true,
@@ -15,13 +17,13 @@ const UserSchema = new Schema({
     },
     thoughts: [
         {
-            type: Schema.Types.ObjectId,
+            type: mongoose_1.Schema.Types.ObjectId,
             ref: "Thoughts",
         },
     ],
     friends: [
         {
-            type: Schema.Types.ObjectId,
+            type: mongoose_1.Schema.Types.ObjectId,
             ref: "User",
         },
     ],
@@ -36,5 +38,5 @@ UserSchema.virtual("friendCount").get(function () {
     return this.friends?.length;
 });
 // Initialize our User model
-const User = model("User", UserSchema);
-export default User;
+const User = (0, mongoose_1.model)("User", UserSchema);
+exports.default = User;
