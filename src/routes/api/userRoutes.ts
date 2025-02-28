@@ -1,12 +1,19 @@
 import { Router } from "express";
-
 const router = Router();
-// ALL of these routes are prefixed with '/api/users'
-router.get("/", async (req, res) => {
-  // We want to QUERY our DATABASE for ALL of the USERS
-  const allusers = await User.find({});
 
-  res.json(allUsers);
-});
+import {
+  getUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+  addFriend,
+  removeFriend,
+} from "../../controllers/userControllers.js";
+
+router.route("/").get(getUsers).post(createUser);
+router.route("/:userId").get(getUserById).put(updateUser).delete(deleteUser);
+router.route("/:id/friends/:friendId").post(addFriend);
+router.route("/:id/friends/:friendId").delete(removeFriend);
 
 export default router;
