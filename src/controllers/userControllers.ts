@@ -44,23 +44,25 @@ export const createUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
   try {
     const user = await User.findOneAndUpdate(
-      { _id: req.body.userId },
+      { _id: req.params.userId },
       { $set: req.body },
       { runValidators: true, new: true }
     );
 
     if (!user) {
-      res.status(404).json({ message: "No user found no user with that ID" });
+      return res
+        .status(404)
+        .json({ message: "No user found no user with that ID" });
     }
-    res.json(user);
+    return res.json(user);
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 };
 // Delete a user by id
 export const deleteUser = async (req: Request, res: Response) => {
   try {
-    const user = await User.findByIdAndDelete({ _req: req.params.userId }); // Delete a user by id
+    const user = await User.findByIdAndDelete(req.params.userId); // Delete a user by id
 
     if (!user) {
       res.status(404).json({ message: "User not found with that ID" }); // If user is not found

@@ -45,21 +45,23 @@ exports.createUser = createUser;
 // update a user by id
 const updateUser = async (req, res) => {
     try {
-        const user = await models_1.User.findOneAndUpdate({ _id: req.body.userId }, { $set: req.body }, { runValidators: true, new: true });
+        const user = await models_1.User.findOneAndUpdate({ _id: req.params.userId }, { $set: req.body }, { runValidators: true, new: true });
         if (!user) {
-            res.status(404).json({ message: "No user found no user with that ID" });
+            return res
+                .status(404)
+                .json({ message: "No user found no user with that ID" });
         }
-        res.json(user);
+        return res.json(user);
     }
     catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 };
 exports.updateUser = updateUser;
 // Delete a user by id
 const deleteUser = async (req, res) => {
     try {
-        const user = await models_1.User.findByIdAndDelete({ _req: req.params.userId }); // Delete a user by id
+        const user = await models_1.User.findByIdAndDelete(req.params.userId); // Delete a user by id
         if (!user) {
             res.status(404).json({ message: "User not found with that ID" }); // If user is not found
         }

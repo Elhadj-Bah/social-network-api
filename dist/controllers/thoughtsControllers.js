@@ -36,6 +36,7 @@ const createThought = async (req, res) => {
     try {
         const newThought = await index_js_1.Thoughts.create(req.body);
         const userId = req.body.userId;
+        console.log(userId);
         const user = await index_js_1.User.findOneAndUpdate({ _id: userId }, { $push: { thoughts: newThought._id } }, { new: true });
         if (!user) {
             res.status(404).json({ message: "No user found with this id!" });

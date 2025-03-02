@@ -34,6 +34,9 @@ export const createThought = async (req: Request, res: Response) => {
   try {
     const newThought = await Thoughts.create(req.body);
     const userId = req.body.userId;
+
+    console.log(userId);
+
     const user = await User.findOneAndUpdate(
       { _id: userId },
       { $push: { thoughts: newThought._id } },
